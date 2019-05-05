@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %} Home Page {% endblock %}
+{% block head %}
+    {{ super() }}
+{%  endblock %}
+{% block body %}
+    <div>
+        <h2>User Profile</h2>
+    </div>
+    {% if err_msg: %}
+        <div  class="alert alert-danger" role="alert">
+            {{err_msg}}
+        </div>
+    {% endif %}
+    <div class="row">
+        <form method="post" action="/register" class="col-md-12">
+            <div class="row">
+                <div class="form-group col-md-12">
+                <br>    <label for="user_name">UserName:</label> </br>
+                    <input type="text" class="form-control" id="user_name" placeholder="UserName" name="userName" value="{{username}}" {% if username %} disabled {%endif%}>
+                    <span>Saved username cannot be changed.</span>
+                </div>
+                <div class="form-group col-md-12">
+              <br>      <label for="first_name">First Name:</label> </br>
+                    <input type="text" class="form-control" id="first_name" placeholder="First Name" name="first_name">
+                </div>
+                <div class="form-group col-md-12">
+                <br>    <label for="last_name">Last Name:</label></br>
+                    <input type="text" class="form-control" id="last_name" placeholder="Last Name" name="last_name">
+                </div>
+                <div class="form-group col-md-12">
+                <br>    <label for="profile">Short Profile:</label></br>
+                    <textarea class="form-control" rows="10" cols="50" id="profile" name="user_profile">{{user_profile}}</textarea>
+                </div>
+            </div>
+            <input type="submit" name="button" class="btn btn-primary mb-2" value="Submit"/>
+        </form>
+    </div>
+{% endblock %}

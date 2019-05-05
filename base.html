@@ -1,0 +1,90 @@
+<html>
+    <head>
+      <style>
+		 body{
+            background-color:silver;
+        }
+		.container {
+			position: relative;
+		}
+		.topright {
+			position: fixed;
+			top: 8px;
+			right: 16px;
+		}
+		button{
+		    height:30px;
+		    width:130px;
+		    border:0;
+		}
+		button:hover{color:Orange; background:pink;}
+		button a{
+		    text-decoration:none;
+		}
+
+	    #bb2{margin-top:10px;}
+        #bb3{width:100px; background:transparent;}
+        #bb3 a:hover{color:Pink;}
+		</style>
+		<meta charset="utf-8"/>
+        <meta charset="utf-8"/>
+
+        {% block head%}
+            <title>
+                {% block title %}
+                {% endblock %}
+            </title>
+        {% endblock %}
+    </head>
+    <body>
+        <div class="tp">
+            <h2>Twitter Application</h2>
+            <hr>
+        </div>
+        <div>
+            {% if user %}
+
+                    <button><a class="navbar-brand" href="/">Home</a></button>
+                    <button><a class="btn btn-outline-light" href="/search-user">Seach User</a></button>
+                    <button><a class="btn btn-outline-light" href="/search-content">Search Content</a></button>
+                    {% if username: %}
+                            <button id="bb2"><a class="btn btn-outline-light" href="/profile">Profile</a></button>
+                        {% endif %}
+                    </div>
+
+                    <div>
+
+                        <div class="container">
+                          <div class="topright"><button id="bb3" class="button button-block"/><a href="{{url}}">Log Out</a> </button>&nbsp;<font style="color:brown;">{{user}}</font></div>
+                        </div>
+
+                    </div>
+                </nav>
+            <hr><br>
+            {% else %}
+
+                <div class="container">
+                    <div>
+                      <form action="/" method="post">
+                        <div class="container">
+                          <div class="topright"><button class="button button-block"/><a href="{{url}}">Log In</a> </button></div>
+                        </div>
+
+                    </div>
+                    <div class="form">
+              		<div class="tab-content">
+              		 <div id="signup">
+                     <center><h1>TWITTER APPLICATION</h1></centre>
+              			 <form action="" method="post">
+              			 </form>
+              		 </div>
+                </div>
+            {% endif %}
+        </div>
+        <div class="container">
+            {% if user %}
+                {% block body %}{% endblock %}
+            {% endif %}
+        </div>
+    </body>
+</html>

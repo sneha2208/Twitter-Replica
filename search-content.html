@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %} Home Page {% endblock %}
+{% block head %}
+    {{ super() }}
+{%  endblock %}
+{% block body %}
+    <div>
+        <h2>Search By Content</h2>
+    </div>
+    {% if err_msg: %}
+        <div  class="alert alert-danger" role="alert">
+            {{err_msg}}
+        </div>
+    {% endif %}
+    <div class="row">
+        <form method="post" action="/search-content" class="col-md-12">
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="search_content">Search:</label>
+                    <input type="text" class="form-control" id="search_content" placeholder="Search Content" name="content" value="{{search}}">
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="submit" name="button" class="btn btn-primary mb-2" value="Search"/>
+                </div>
+            </div>
+            {% if tweets: %}
+                <h5>Search for {{search}}:</h5>
+                {% for tweet in tweets %}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h5>By: {{tweet.fields[1].value}}</h5>
+                        </div>
+                        <div class="col-md-12">
+                            {{tweet.fields[0].value}}
+                        </div>
+                        <div class="col-md-12">
+                            {{tweet.fields[2].value}}
+                        </div>
+                        <hr>
+                    </div>
+                {% endfor %}
+            {% endif%}
+        </form>
+    </div>
+
+{% endblock %}

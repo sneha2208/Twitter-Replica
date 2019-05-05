@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %} Home Page {% endblock %}
+{% block head %}
+    {{ super() }}
+{%  endblock %}
+{% block body %}
+    <div>
+        <h2>Search User</h2>
+    </div>
+    {% if err_msg: %}
+        <div  class="alert alert-danger" role="alert">
+            {{err_msg}}
+        </div>
+    {% endif %}
+    <div class="row">
+        <form method="post" action="/search-user" class="col-md-12">
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label for="seach_user">Search Username</label> &nbsp;
+                    <input type="text" class="form-control" id="seach_user" placeholder="Username" name="userName" value="{{search}}">
+                    &nbsp;&nbsp;
+                    <input type="submit" name="button" class="btn btn-primary mb-2" value="Search"/>
+                </div>
+
+                    <hr>
+
+            </div>
+            {% if userInfo: %}
+                <div>
+                     <div class="row">
+                  <br>      <div class="col-md-2">UserName: {{userInfo.user_name}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">Email: {{userInfo.email}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">Name: {{userInfo.first_name}} {{userInfo.last_name}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">Total Followers: {{userInfo.followed_by_count}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">Total Followed To: {{userInfo.followed_to_count}}</div>
+                    </div>
+                </div>
+                {% if following == True: %}
+                    <div>
+                        <input type="submit" name="button" class="btn btn-success mb-2" value="Following" disabled/>
+                        <input type="submit" name="button" class="btn btn-danger mb-2" value="Unfollow"/>
+                    </div>
+                {% else: %}
+                    <div>
+                        <input type="submit" name="button" class="btn btn-success mb-2" value="Follow"/>
+                    </div>
+                {% endif %}
+                {% if tweets|length > 0: %}
+                    <h5>Last 50 Tweets of {{search}}:</h5>
+                    {% for tweet in tweets %}
+                        <div class="row">
+                            <div class="col-md-12">
+                                {{tweet.user_name}}
+                            </div>
+                            <div class="col-md-12">
+                                {{tweet.tweet_content}}
+                            </div>
+                            <div class="col-md-12">
+                                {{tweet.updated_date}}
+                            </div>
+                            <hr>
+                        </div>
+                    {% endfor %}
+    {% endif%}
+
+            {% endif %}
+        </form>
+    </div>
+
+{% endblock %}
